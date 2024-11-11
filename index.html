@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>手机摄像头访问示例</title>
+</head>
+<body>
+    <h1>摄像头预览</h1>
+    <video id="video" width="320" height="240" autoplay></video>
+
+    <script>
+        // 检查浏览器是否支持媒体设备
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // 请求摄像头权限
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    var video = document.getElementById('video');
+                    // 将视频流设置为视频元素的源
+                    video.srcObject = stream;
+                    video.play();
+                })
+                .catch(function(err) {
+                    console.error("访问摄像头失败: ", err);
+                });
+        } else {
+            alert("您的浏览器不支持访问媒体设备。");
+        }
+    </script>
+</body>
+</html>
